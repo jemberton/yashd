@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  mongodb:
+    container_name: yashd-db
+    image: mongo
+    volumes:
+      - yashd-db:/data/db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+    networks:
+      - sysnet
+
+  api:
+    container_name: yashd-api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    image: yashd-api
+    command: npm run start:nodemon
+    volumes:
+      - ./api/src/:/yashd/api/src
+      - /yashd/api/src/node_modules
+    ports:
+      - 5172:5172
+    depends_on:
+      - mongodb
+    networks:
+      - sysnet
+  
+  app:
+    container_name: yashd-app
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    image: yashd-app
+    command: npm run dev
+    volumes:
+      - ./app:/yashd/app
+      - /yashd/app/node_modules
+    depends_on:
+      - api
+    ports:
+      - 5173:5173
+    networks:
+      - sysnet
+
+networks:
+  sysnet:
+    driver: bridge
+
+volumes:
+  yashd-db:

@@ -1,0 +1,13 @@
+$global-padding: 1em;
+$global-font-size: 10pt;
+$global-font-family: monospace;
+$global-border-radius: 0.5em;
+$global-box-shadow: 0 0.5em 0.75em $crust;
+
+$frame-bg: $crust;
+$frame-color: $text;
+
+$frame-middle-bg: $base;
+$frame-middle-color: $frame-color;
+$frame-middle-left-bg: $mantle;
+$frame-middle-right-bg: $mantle;

@@ -1,0 +1,29 @@
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    65% { transform: scale(1.2); }
+    80% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes flashSearch {
+    0% { border-color: $mauve; }
+    20% { border-color: $red; }
+    100% { border-color: $mauve; }
+}
+
+@keyframes flashSearchButton {
+    0% { background: $mauve; }
+    20% { background: $red; }
+    100% { background: $mauve; }
+}
+
+@keyframes shakeNegative {
+    0% { margin-left: -0.65em; margin-right: 0em; }
+    10% { margin-left: 0em; margin-right: 0em; }
+    30% { margin-left: 0em; margin-right: -0.65em; }
+    50% { margin-left: 0em; margin-right: 0em; }
+    70% { margin-left: -0.65em; margin-right: 0em; }
+    100% { margin-left: 0em; margin-right: 0em; }
+}

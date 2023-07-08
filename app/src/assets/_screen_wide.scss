@@ -1,0 +1,108 @@
+#frame {
+    margin: 0; padding: 0;
+    display: flex; position: relative;
+
+    flex-direction: column;
+    flex-grow: 1;
+
+    #frame-top {
+        margin: 0; padding: 0;
+        display: flex; position: relative;
+
+        flex-direction: row;
+        justify-content: start; align-items: end;
+
+        background: $frame-bg; color: $frame-color;
+
+        #frame-top-left {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+        }
+
+        #frame-top-center {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        #frame-top-right {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+        }
+    }
+
+    #frame-middle {
+        margin: 0; padding: 0;
+        display: flex; position: relative;
+
+        flex-direction: row;
+        justify-content: start; align-items: stretch;
+        flex-grow: 1;
+
+        background: $frame-middle-bg; color: $frame-middle-color;
+
+        #frame-middle-left {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: column;
+        }
+
+        #frame-middle-center {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        #frame-middle-right {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: column;
+        }
+    }
+
+    #frame-bottom {
+        margin: 0; padding: 0;
+        display: flex; position: relative;
+
+        flex-direction: row;
+        justify-content: start; align-items: center;
+
+        background: $frame-bg; color: $frame-color;
+
+        font-size: 0.8em;
+
+        #frame-bottom-left {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+        }
+
+        #frame-bottom-center {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        #frame-bottom-right {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+        }
+    }
+}

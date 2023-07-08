@@ -1,0 +1,69 @@
+@import "mocha";
+@import "global_variables";
+@import "animations";
+
+div {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0; padding: 0;
+    display: flex; position: relative;
+
+    flex-direction: column;
+
+    width: 100vw; height: 100vh;
+    max-width: 100%;
+
+    font-family: $global-font-family;
+    font-size: $global-font-size;
+
+    background: $frame-bg; color: $frame-color;
+}
+
+svg {
+    width: 1em; height: 1em;
+}
+
+.todo {
+    margin: 0; padding: $global-padding;
+    display: flex; position: relative;
+    flex-direction: column;
+    background: $yellow; color: $crust;
+    border-left: 1em solid rgba(0,0,0,0.2);
+    font-family: sans-serif;
+    justify-content: start; align-items: start;
+}
+
+#app {
+    margin: 0; padding: 0;
+    display: flex; position: relative;
+
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.vertical-separator {
+    margin: 0; padding: 0;
+    display: flex; position: relative;
+    border-left: 2px solid $base;
+    min-width: 1px; height: 100%;
+}
+
+@import "screen_desktop";
+
+// @media screen and (max-width: 640px) {
+//     @import "screen_small";
+// }
+
+// @media screen and (min-width: 768px) {
+//     @import "screen_medium";
+// }
+
+// @media screen and (min-width: 1024px) {
+//     @import "screen_desktop";
+// }
+
+// @media screen and (min-width: 1280px) {
+//     @import "screen_wide";
+// }

@@ -1,0 +1,164 @@
+#overlay {
+    margin: 0; padding: 1em;
+    display: flex; position: absolute;
+    height: 100%; width: 100%;
+    background: $crust;
+    opacity: 90%;
+    z-index: 10;
+}
+
+#messages {
+    margin: 0; padding: 0;
+    display: flex; position: absolute;
+    flex-direction: column;
+    background: $mantle; color: $text;
+    bottom: calc($global-padding * 6); right: calc($global-padding * 2);
+    border-radius: $global-border-radius;
+    border: 2px solid rgba(0,0,0,0.2);
+    box-shadow: $global-box-shadow;
+    max-width: 22em; width: 22em;
+
+    z-index: 20;
+
+    .message {
+        margin: 0.5em; padding: 1em;
+        display: flex; position: relative;
+        flex-direction: row;
+        border-radius: $global-border-radius;
+
+        background: $crust; color: $subtext1;
+    }
+}
+
+#frame {
+    margin: 0; padding: 0;
+    display: flex; position: relative;
+
+    flex-direction: column;
+    flex-grow: 1;
+
+    #frame-top {
+        margin: 0; padding: 0;
+        display: flex; position: relative;
+
+        flex-direction: row;
+        justify-content: start; align-items: end;
+
+        background: $frame-bg; color: $frame-color;
+
+        #frame-top-left {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+            border: 2px solid transparent;
+
+            flex-direction: row;
+        }
+
+        #frame-top-center {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+            justify-content: center;
+            flex-grow: 1;
+
+            border: 2px solid transparent;
+        }
+
+        #frame-top-right {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+
+            border: 2px solid transparent;
+        }
+
+        #frame-top-left, #frame-top-center, #frame-top-right {
+            &.focused { z-index: 11; }
+        }
+    }
+
+    #frame-middle {
+        margin: 0; padding: 0;
+        display: flex; position: relative;
+
+        flex-direction: row;
+        justify-content: start; align-items: stretch;
+        flex-grow: 1;
+
+        background: $frame-middle-bg; color: $frame-middle-color;
+
+        #frame-middle-left {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: column;
+            border: 2px solid $crust;
+            border-right-color: $mantle;
+        }
+
+        #frame-middle-center {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: column;
+            flex-grow: 1;
+            border: 2px solid $mantle;
+        }
+
+        #frame-middle-right {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: column;
+            // border: 2px solid transparent;
+        }
+
+        #frame-middle-left, #frame-middle-center, #frame-middle-right {
+            &.focused { z-index: 11; border: 2px dashed $rosewater; }
+        }
+    }
+
+    #frame-bottom {
+        margin: 0; padding: 0;
+        display: flex; position: relative;
+
+        flex-direction: row;
+        justify-content: start; align-items: center;
+
+        background: $frame-bg; color: $frame-color;
+
+        font-size: 0.8em;
+
+        #frame-bottom-left {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+            // border: 2px solid transparent;
+        }
+
+        #frame-bottom-center {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+            justify-content: center;
+            flex-grow: 1;
+            // border: 2px solid transparent;
+        }
+
+        #frame-bottom-right {
+            margin: 0; padding: 0;
+            display: flex; position: relative;
+
+            flex-direction: row;
+            // border: 2px solid transparent;
+        }
+
+        #frame-bottom-left, #frame-bottom-center, #frame-bottom-right {
+            &.focused { z-index: 11; }
+        }
+    }
+}
