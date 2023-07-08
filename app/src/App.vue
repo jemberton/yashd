@@ -15,6 +15,7 @@ import { useGlobalState } from '@/stores/globalState'
 const leftSidebar = useLeftSidebar()
 let leftSidebarState = false
 const globalState = useGlobalState()
+globalState.messages = []
 
 const editToggle = (pageID: String) => {
   switch (pageID) {
@@ -51,14 +52,25 @@ const editToggle = (pageID: String) => {
       break;
   }
 }
-
 </script>
 
 <template>  
   <div v-show="globalState.overlay" id="overlay" @click="editToggle('')"></div>
-  <div id="messages">
-    <div class="message">THIS IS A MESSAGE</div>
-    <div class="message">THIS IS A MESSAGE</div>
+  <div v-show="globalState.messages.length > 0" id="messages">
+    <template v-for="message in globalState.messages" :key="message.title">
+      <div :class="'message ' + message.priority">
+        <div v-show="message.icon !== ''" class="icon">ICON: {{ message.icon }}</div>
+        <div class="details">
+          <div class="title">{{ message.title }}</div>
+          <div class="msg">
+            <div>MESSAGE: {{ message.message }}</div>
+            <div>PRIORITY: {{ message.priority }}</div>
+            <div>_ID: {{ message._id }}</div>
+          </div>
+        </div>
+        
+      </div>
+    </template>
   </div>
   <div id="frame">
     <div id="frame-top">

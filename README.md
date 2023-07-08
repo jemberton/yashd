@@ -4,7 +4,7 @@ YASHD (Yet Another Self-Hosted Dashboard) is an open-source personal dashboard a
 
 ## Installation
 
-YASHD can be installe dusing Docker or manually.
+YASHD can be installed using Docker or manually.
 
 ### docker
 

@@ -2,6 +2,14 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 // import { useStorage } from '@vueuse/core'
 
+interface Message {
+  title: String,
+  message: String,
+  priority: String,
+  icon: String,
+  _id: String
+}
+
 export const useGlobalState = defineStore('globalState', () => {
   const rainbow = ref(false)
   const overlay = ref(false)
@@ -22,12 +30,19 @@ export const useGlobalState = defineStore('globalState', () => {
     open: { type: Boolean, value: false }
   })
 
-  const messages = ref([{
-    title: { type: String, value: "Misconfigured Message" },
-    message: { type: String, value: "This message has not been completely configured. You should find all message calls and verify there are no missing pieces." },
-    priority: { type: Number, value: 0 },
-    icon: { type: String, value: "" }
-  }])
+  const messages = ref([<Message> {}])
+
+  const _processQueue = async (messageID: String) => {
+    setTimeout(() => {
+      console.log("time has elapsed for message queue", messageID)
+      messages.value = messages.value.filter((e, i) => e._id !== messageID)
+    }, 5000)
+  }
+
+  async function messageAdd2Queue(message: Message) {
+    const total = messages.value.push(message)
+    _processQueue(message._id)
+  }
 //   const localState = useStorage('leftSidebar', { open: true, enabled: true }, localStorage, { mergeDefaults: true })
 
 //   function pageEdit (pageID: String) {
@@ -69,6 +84,6 @@ export const useGlobalState = defineStore('globalState', () => {
     overlay,
     focused,
     editor,
-    messages
+    messages, messageAdd2Queue
   }
 })

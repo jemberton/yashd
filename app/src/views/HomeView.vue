@@ -80,6 +80,7 @@ async function _deleteItems() {
           console.log("_deleteItems SUCCESS")
           let resData = await res.json()
           console.log("_deleteItems COUNT:", resData.deletedCount)
+          globalState.messageAdd2Queue({ title: "Items deleted", message: "", priority: "success", icon: "success", _id: v4() })
           getHomeItems()
           break
         case 400:
@@ -110,6 +111,7 @@ async function _savePage() {
     switch (res.status) {
         case 200:
           console.log("_savePage SUCCESS")
+          globalState.messageAdd2Queue({ title: "Page Saved", message: "", priority: "success", icon: "success", _id: v4() })
           break
         case 400:
           console.log("_savePage ERROR (BAD REQUEST)")
@@ -168,6 +170,7 @@ async function _cancelPage() {
   globalState.editor.open.value = false
   editorTitleError.value = false
   getHomeItems()
+  globalState.messageAdd2Queue({ title: "action canceled", message: "the edit page action has been canceled. Resetting the home items ...", priority: "info", icon: "info", _id: v4() })
 }
 
 /**
