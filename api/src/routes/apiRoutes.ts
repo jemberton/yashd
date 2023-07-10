@@ -15,6 +15,7 @@ apiRoute.get('/api/getSideBarItems', async (req: Request, res: Response) => {
 });
 
 apiRoute.post('/api/saveHomeItems', async (req: Request, res: Response) => {
+    let newItems = 0
 
     try {
         [...req.body].forEach(async (item, index) => {
@@ -28,6 +29,7 @@ apiRoute.post('/api/saveHomeItems', async (req: Request, res: Response) => {
                     enabled: item.enabled !== undefined ? item.enabled : true,
                     order: index,
                 })
+                newItems += 1
             } else {
                 await mongoDB.HomeItem.updateOne({ _id: item._id }, { '$set': {
                     order: index,
@@ -42,7 +44,7 @@ apiRoute.post('/api/saveHomeItems', async (req: Request, res: Response) => {
         })
 
         let homeItems = await mongoDB.HomeItem.find({})
-        res.status(200).json(homeItems)
+        res.status(200).json({ newItems: newItems })
     } catch {
         console.log("Error saving items in database")
     }

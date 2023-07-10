@@ -3,10 +3,12 @@ import { onMounted, ref } from 'vue'
 import Button from '../components/ComponentButton.vue'
 import draggable from 'vuedraggable'
 import { useGlobalState } from '@/stores/globalState'
+import { useMessages } from '@/stores/messages'
 import { v4 } from 'uuid'
 
 const emit = defineEmits(['editToggle'])
 const globalState = useGlobalState()
+const messages = useMessages()
 
 interface HomeItem {
   _id: String,
@@ -77,20 +79,22 @@ async function _deleteItems() {
     }).then(async res => {
       switch (res.status) {
         case 200:
-          console.log("_deleteItems SUCCESS")
           let resData = await res.json()
-          console.log("_deleteItems COUNT:", resData.deletedCount)
-          globalState.messageAdd2Queue({ title: "Items deleted", message: "", priority: "success", icon: "success", _id: v4() })
+          if (resData.deletedCount === 1) {
+            messages.addMessage({ title: "Item Deleted", message: `${ resData.deletedCount } item deleted.`, priority: "success", icon: "circle-info", _id: v4(), timeout: 5000, timeoutID: 0 })
+          } else {
+            messages.addMessage({ title: "Items Deleted", message: `${ resData.deletedCount } items deleted.`, priority: "success", icon: "circle-info", _id: v4(), timeout: 5000, timeoutID: 0 })
+          }
           getHomeItems()
           break
         case 400:
-          console.log("_deleteItems ERROR (BAD REQUEST)")
+          messages.addMessage({ title: "Error", message: "There was an error when trying to delete items. [400] Bad request", priority: "error", icon: "circle-xmark", _id: v4(), timeout: 0, timeoutID: 0 })
           break
         case 500:
-          console.log("_deleteItems ERROR (SERVER)")
+          messages.addMessage({ title: "Error", message: "There was an error when trying to delete items. [500] Server failed", priority: "error", icon: "circle-xmark", _id: v4(), timeout: 0, timeoutID: 0 })
           break
         default:
-          console.log("_deleteItems STATUS CODE NOT CONFIGURED")
+          messages.addMessage({ title: "Error", message: "There was an error when trying to delete items. [?] Unknown response ", priority: "error", icon: "circle-xmark", _id: v4(), timeout: 0, timeoutID: 0 })
       }
     })
   }
@@ -107,20 +111,26 @@ async function _savePage() {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(homeItems.value)
-  }).then(res => {
+  }).then(async res => {
     switch (res.status) {
         case 200:
-          console.log("_savePage SUCCESS")
-          globalState.messageAdd2Queue({ title: "Page Saved", message: "", priority: "success", icon: "success", _id: v4() })
+          let resData = await res.json()
+          if (resData.newItems > 1 ) {
+            messages.addMessage({ title: "Page Saved", message: `${ resData.newItems } items added.`, priority: "success", icon: "circle-check", _id: v4(), timeout: 5000, timeoutID: 0 })
+          } else if (resData.newItems === 1) {
+            messages.addMessage({ title: "Page Saved", message: `${ resData.newItems } item added.`, priority: "success", icon: "circle-check", _id: v4(), timeout: 5000, timeoutID: 0 })
+          } else {
+            messages.addMessage({ title: "Page Saved", message: "", priority: "success", icon: "circle-check", _id: v4(), timeout: 5000, timeoutID: 0 })
+          }
           break
         case 400:
-          console.log("_savePage ERROR (BAD REQUEST)")
+          messages.addMessage({ title: "Error", message: "An error occurred when trying to save the page. [400] Bad request", priority: "error", icon: "circle-xmark", _id: v4(), timeout: 0, timeoutID: 0 })
           break
         case 500:
-          console.log("_savePage ERROR (SERVER)")
+          messages.addMessage({ title: "Error", message: "An error occurred when trying to save the page. [500] Server fail", priority: "error", icon: "circle-xmark", _id: v4(), timeout: 0, timeoutID: 0 })
           break
         default:
-          console.log("_savePage STATUS CODE NOT CONFIGURED")
+          messages.addMessage({ title: "Error", message: "An error occurred when trying to save the page. [?] Unknown response", priority: "error", icon: "circle-xmark", _id: v4(), timeout: 0, timeoutID: 0 })
       }
   })
 
@@ -143,6 +153,7 @@ function _deleteItem(itemID: String) {
   }
 
   homeItems.value = homeItems.value.filter((e, i) => e._id !== itemID)
+  messages.addMessage({ title: "Item Removed", message: "An item has been removed from the queue. Changes must be saved to persist.", priority: "warning", icon: "trash", _id: v4(), timeout: 5000, timeoutID: 0 })
 }
 
 /**
@@ -157,6 +168,7 @@ function _addItem() {
      * TODO Validate the item and make sure we have what we need!
      */
     homeItems.value.push(newItem.value)
+    messages.addMessage({ title: "Item Added", message: "A new item has been added to the queue. Changes must be saved to persist.", priority: "info", icon: "cubes-stacked", _id: v4(), timeout: 5000, timeoutID: 0 })
     editorTitleError.value = false
     _setNewItem()
     _closeEditor()
@@ -170,7 +182,8 @@ async function _cancelPage() {
   globalState.editor.open.value = false
   editorTitleError.value = false
   getHomeItems()
-  globalState.messageAdd2Queue({ title: "action canceled", message: "the edit page action has been canceled. Resetting the home items ...", priority: "info", icon: "info", _id: v4() })
+  messages.addMessage({ title: "Changes Not Saved", message: "", priority: "", icon: "circle-info", _id: v4(), timeout: 5000, timeoutID: 0 })
+  //FIXME
 }
 
 /**

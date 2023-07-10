@@ -13,7 +13,7 @@ import { faBars, faChevronLeft, faChevronRight,
          faPenToSquare, faToggleOff, faToggleOn,
          faSquareCaretLeft, faSquareCaretRight, faCaretLeft,
          faCaretRight, faSliders, faFloppyDisk, faPlus,
-         faBan, faCircle, faTrash, faEyeSlash
+         faBan, faCircle, faTrash, faEyeSlash, faCircleInfo, faCircleCheck, faTriangleExclamation, faCircleExclamation, faBomb, faCircleXmark, faCubesStacked
         } from '@fortawesome/free-solid-svg-icons'
 import { faVuejs, faGithubAlt } from '@fortawesome/free-brands-svg-icons'
 
@@ -30,7 +30,9 @@ library.add(faMagnifyingGlass, faBars, faChevronLeft,
             faBell, faGaugeHigh, faPenToSquare, faToggleOff,
             faToggleOn, faSquareCaretLeft, faSquareCaretRight,
             faCaretLeft, faCaretRight, faSliders, faFloppyDisk,
-            faPlus, faBan, faCircle, faTrash, faEyeSlash
+            faPlus, faBan, faCircle, faTrash, faEyeSlash, faCircleInfo,
+            faCircleCheck, faTriangleExclamation, faCircleExclamation,
+            faBomb, faCircleXmark, faCubesStacked
             )
 
 app.component('font-awesome-icon', FontAwesomeIcon)

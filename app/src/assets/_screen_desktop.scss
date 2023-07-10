@@ -21,62 +21,6 @@
     gap: calc($global-padding);
 
     z-index: 20;
-
-    .message {
-        margin: 0; padding: 0;
-        display: flex; position: relative;
-        flex-direction: row;
-        border-radius: $global-border-radius;
-        font-size: 0.9em;
-        border: 2px solid rgba(0,0,0,0.2);
-        justify-content: start; align-items: center;
-        max-width: 30em; width: 30em;
-
-        background: $base; color: $subtext1;
-
-        &.info {
-            // border-color: $blue;
-            color: $blue;
-        }
-
-        &.success {
-            // border-color: $green;
-            color: $green;
-        }
-
-        .icon {
-            margin: 0; padding: 1em;
-            display: flex; position: relative;
-            flex-direction: column;
-            width: 4em; max-width: 4em;
-            height: 4em; max-height: 4em;
-        }
-
-        .details {
-            margin: 0; padding: 0;
-            display: flex; position: relative;
-            flex-direction: column;
-            flex-grow: 1;
-
-            .title {
-                margin: 0; padding: 1em;
-                padding-bottom: calc($global-padding / 2);
-                padding-bottom: 0;
-                display: flex; position: relative;
-                flex-direction: row;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-
-            .msg {
-                margin: 0; padding: 1em;
-                padding-top: calc($global-padding / 2);
-                display: flex; position: relative;
-                flex-direction: column;
-                color: $text;
-            }
-        }
-    }
 }
 
 #frame {

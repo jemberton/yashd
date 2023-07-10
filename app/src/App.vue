@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import FrameBranding from './components/FrameBranding.vue'
 import FrameSearch from './components/FrameSearch.vue'
 import FrameUserControls from './components/FrameUserControls.vue'
+import TrayMessage from './components/ComponentMessage.vue'
 
 import LeftSidebar from './components/LeftSidebar.vue'
 import RightSidebar from './components/RightSidebar.vue'
@@ -57,19 +58,16 @@ const editToggle = (pageID: String) => {
 <template>  
   <div v-show="globalState.overlay" id="overlay" @click="editToggle('')"></div>
   <div v-show="globalState.messages.length > 0" id="messages">
-    <template v-for="message in globalState.messages" :key="message.title">
-      <div :class="'message ' + message.priority">
-        <div v-show="message.icon !== ''" class="icon">ICON: {{ message.icon }}</div>
-        <div class="details">
-          <div class="title">{{ message.title }}</div>
-          <div class="msg">
-            <div>MESSAGE: {{ message.message }}</div>
-            <div>PRIORITY: {{ message.priority }}</div>
-            <div>_ID: {{ message._id }}</div>
-          </div>
-        </div>
-        
-      </div>
+    <template v-for="message in globalState.messages" :key="message._id">
+      <TrayMessage
+        :title="message.title"
+        :message="message.message"
+        :icon="message.icon"
+        :priority="message.priority"
+        :_id="message._id"
+        :timeout="message.timeout"
+        :timeoutID="message.timeoutID"
+      />
     </template>
   </div>
   <div id="frame">
